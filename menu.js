@@ -42,12 +42,12 @@ function printMenu(menu){
   if(!menu) return {
 
   }
-  var str = "";
+  var str = ""
   for(var i in menu) {
     if(menu[i].children.length !== 0)
-      str+= "<li><a href='"+ menu[i].link.uri_alias +"' /> "+menu[i].title+"<ul class='submenu'>"+printMenu(menu[i].children)+"</ul></li>";
+      str+= "<li><a href='"+ menu[i].link.uri_alias +"' /> "+menu[i].title+"</a><ul class='submenu'>"+printMenu(menu[i].children)+"</ul></li>"
     else
-      str+= "<li><a href='"+ menu[i].link.uri_alias +"' />"+ menu[i].title+"</li>";
+      str+= "<li><a href='"+ menu[i].link.uri_alias +"' />"+ menu[i].title+"</a></li>"
   }
   return str;
 };
@@ -55,7 +55,7 @@ function printMenu(menu){
 function traverseTree(arr, menu_name) {
   var menu
   menu = unflatten(arr.allMenuLinkContentMenuLinkContent.edges, menu_name)
-
+  console.log(menu)
   menu = printMenu(menu)
 
   return menu
@@ -77,6 +77,7 @@ const Menu = ({menuName}) => (
                 langcode
                 weight
                 link {
+                  uri
                   uri_alias
                 }
                 drupal_parent_menu_item
