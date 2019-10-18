@@ -1,21 +1,21 @@
 import React from "react"
 import { StaticQuery, graphql, Link } from "gatsby"
 import PropTypes from "prop-types";
+import("./menu.scss")
 
-function unflatten(arr, menu_name) {
+function createMenuHierarchy(menuData, menuName) {
   var tree = [],
      mappedArr = {},
      arrElem,
      mappedElem
 
   // First map the nodes of the array to an object -> create a hash table.
-  for (var i = 0, len = arr.length; i < len; i++) {
-    arrElem = arr[i].node
-    
-    if (arrElem.menu_name === menu_name && arrElem.enabled === true) {
-      mappedArr[arrElem.drupal_id] = arrElem;
-      if (arrElem.drupal_parent_menu_item !== null && arrElem.drupal_parent_menu_item.includes('menu_link_content:')) {
-        var stripped_drupal_id = arrElem.drupal_parent_menu_item.replace('menu_link_content:', '')
+  for (var i = 0, len = menuData.length; i < len; i++) {
+    arrElem = menuData[i].node
+    if (arrElem.menu_name === menuName && arrElem.enabled === true) {
+      mappedArr[arrElem.drupal_id] = arrElem
+      if (arrElem.drupal_parent_menu_item != null && arrElem.drupal_parent_menu_item.includes(arrElem.bundle)) {
+        var stripped_drupal_id = arrElem.drupal_parent_menu_item.replace(arrElem.bundle + ':', '')
         mappedArr[arrElem.drupal_id].drupal_parent_menu_item = stripped_drupal_id
       }
       mappedArr[arrElem.drupal_id]['children'] = []
@@ -38,25 +38,50 @@ function unflatten(arr, menu_name) {
   return tree
 }
 
-function printMenu(menu){
-  if(!menu) return {
+function buildLink(link) {
+  if(!link.external && link.link.uri_alias) {
+    return ( <Link to={link.link.uri_alias}>
+      {link.title}
+    </Link>)
+  } else if(!link.external && link.link.uri.includes('internal:')) {
+    return ( <Link to={link.link.uri.replace('internal:', '')}>
+      {link.title}
+    </Link>)
+  } else {
+    return ( <a href={link.link.uri_alias} className={'external'}>
+      {link.title}
+    </a>)
+  }
+}
 
+function buildMenu(menuArray){
+  if(!menuArray)  {
+    return
   }
-  var str = ""
-  for(var i in menu) {
-    if(menu[i].children.length !== 0)
-      str+= "<li><a href='"+ menu[i].link.uri_alias +"' /> "+menu[i].title+"</a><ul class='submenu'>"+printMenu(menu[i].children)+"</ul></li>"
-    else
-      str+= "<li><a href='"+ menu[i].link.uri_alias +"' />"+ menu[i].title+"</a></li>"
+  var menu = []
+  for(var item in menuArray) {
+    if(menuArray[item].children.length !== 0) {
+      menu.push(
+      <li>
+        {buildLink(menuArray[item])}
+        <ul className="submenu">
+          {buildMenu(menuArray[item].children)}
+        </ul>
+      </li>)
+    } else {
+      menu.push(<li>{buildLink(menuArray[item])}</li>)
+    }
   }
-  return str;
+
+  return menu
+
 };
 
-function traverseTree(arr, menu_name) {
+function generateMenu(menuLinks, menuName) {
   var menu
-  menu = unflatten(arr.allMenuLinkContentMenuLinkContent.edges, menu_name)
-  console.log(menu)
-  menu = printMenu(menu)
+
+  menu = createMenuHierarchy(menuLinks.allMenuLinkContentMenuLinkContent.edges, menuName)
+  menu = buildMenu(menu)
 
   return menu
 }
@@ -91,7 +116,12 @@ const Menu = ({menuName}) => (
       `
       }
       render={data => (
-           <ul dangerouslySetInnerHTML={{__html: traverseTree(data, menuName)}} />
+        <nav className={menuName}>
+          <ul >
+            {generateMenu(data, menuName)}
+          </ul>
+        </nav>
+
       )}
    />
 )
