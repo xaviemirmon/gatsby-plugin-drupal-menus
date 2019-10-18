@@ -4,25 +4,25 @@ import PropTypes from "prop-types";
 import("./menu.scss")
 
 function createMenuHierarchy(menuData, menuName) {
-  var tree = [],
+  let tree = [],
      mappedArr = {},
      arrElem,
      mappedElem
 
   // First map the nodes of the array to an object -> create a hash table.
-  for (var i = 0, len = menuData.length; i < len; i++) {
+  for (let i = 0, len = menuData.length; i < len; i++) {
     arrElem = menuData[i].node
     if (arrElem.menu_name === menuName && arrElem.enabled === true) {
       mappedArr[arrElem.drupal_id] = arrElem
       if (arrElem.drupal_parent_menu_item != null && arrElem.drupal_parent_menu_item.includes(arrElem.bundle)) {
-        var stripped_drupal_id = arrElem.drupal_parent_menu_item.replace(arrElem.bundle + ':', '')
+        let stripped_drupal_id = arrElem.drupal_parent_menu_item.replace(arrElem.bundle + ':', '')
         mappedArr[arrElem.drupal_id].drupal_parent_menu_item = stripped_drupal_id
       }
       mappedArr[arrElem.drupal_id]['children'] = []
     }
   }
 
-  for (var id in mappedArr) {
+  for (let id in mappedArr) {
     if (mappedArr.hasOwnProperty(id)) {
       mappedElem = mappedArr[id]
       // If the element is not at the root level, add it to its parent array of children.
@@ -58,8 +58,8 @@ function buildMenu(menuArray){
   if(!menuArray)  {
     return
   }
-  var menu = []
-  for(var item in menuArray) {
+  let menu = []
+  for(let item in menuArray) {
     if(menuArray[item].children.length !== 0) {
       menu.push(
       <li>
@@ -78,7 +78,7 @@ function buildMenu(menuArray){
 };
 
 function generateMenu(menuLinks, menuName) {
-  var menu
+  let menu
 
   menu = createMenuHierarchy(menuLinks.allMenuLinkContentMenuLinkContent.edges, menuName)
   menu = buildMenu(menu)
