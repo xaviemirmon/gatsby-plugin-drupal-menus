@@ -1,7 +1,6 @@
 import React from "react"
 import { StaticQuery, graphql, Link } from "gatsby"
 import PropTypes from "prop-types";
-import("./menu.scss")
 
 function createMenuHierarchy(menuData, menuName) {
   let tree = [],
