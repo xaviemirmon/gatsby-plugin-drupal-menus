@@ -1,0 +1,24 @@
+{
+  "name": "gatsby-drupal-menus",
+  "version": "1.0.0",
+  "description": "Adds support for nested hierarchical menus from Drupal 8 in Gatsby.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xaviemirmon/gatsby_drupal_menus.git"
+  },
+  "keywords": [
+    "GatsbyJS",
+    "Drupal",
+    "Menus"
+  ],
+  "author": "Xavier Mirabelli-Montan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xaviemirmon/gatsby_drupal_menus/issues"
+  },
+  "homepage": "https://github.com/xaviemirmon/gatsby_drupal_menus#readme"
+}

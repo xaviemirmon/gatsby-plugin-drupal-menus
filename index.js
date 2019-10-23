@@ -131,7 +131,7 @@ Menu.propTypes = {
 }
 
 Menu.defaultProps = {
-  menuName: `primary-menu`,
+  menuName: `main`,
 }
 
 export default Menu
