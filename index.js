@@ -61,14 +61,14 @@ function buildMenu(menuArray){
   for(let item in menuArray) {
     if(menuArray[item].children.length !== 0) {
       menu.push(
-      <li>
+      <li key={menuArray[item].drupal_id}>
         {buildLink(menuArray[item])}
         <ul className="submenu">
           {buildMenu(menuArray[item].children)}
         </ul>
       </li>)
     } else {
-      menu.push(<li>{buildLink(menuArray[item])}</li>)
+      menu.push(<li key={menuArray[item].drupal_id}>{buildLink(menuArray[item])}</li>)
     }
   }
 

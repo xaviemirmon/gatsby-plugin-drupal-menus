@@ -11,9 +11,11 @@
     "url": "git+https://github.com/xaviemirmon/gatsby_drupal_menus.git"
   },
   "keywords": [
-    "GatsbyJS",
-    "Drupal",
-    "Menus"
+    "gatsby",
+    "gatsby-plugin",
+    "gastby-component",
+    "drupal",
+    "menus"
   ],
   "author": "Xavier Mirabelli-Montan",
   "license": "MIT",
