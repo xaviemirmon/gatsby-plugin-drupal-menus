@@ -39,11 +39,11 @@ function createMenuHierarchy(menuData, menuName) {
 
 function buildLink(link) {
   if(!link.external && link.link.uri_alias) {
-    return ( <Link to={link.link.uri_alias}>
+    return ( <Link activeClassName="active" to={link.link.uri_alias}>
       {link.title}
     </Link>)
   } else if(!link.external && link.link.uri.includes('internal:')) {
-    return ( <Link to={link.link.uri.replace('internal:', '')}>
+    return ( <Link activeClassName="active" to={link.link.uri.replace('internal:', '')}>
       {link.title}
     </Link>)
   } else {
