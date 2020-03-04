@@ -1,10 +1,10 @@
 {
   "name": "@xaviemirmon/gatsby-drupal-menus",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Adds support for nested hierarchical menus from Drupal 8 in Gatsby.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config=jest.config.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,14 @@
   "bugs": {
     "url": "https://github.com/xaviemirmon/gatsby_drupal_menus/issues"
   },
-  "homepage": "https://github.com/xaviemirmon/gatsby_drupal_menus#readme"
+  "homepage": "https://github.com/xaviemirmon/gatsby_drupal_menus#readme",
+  "dependencies": {
+    "babel-jest": "^24.9.0",
+    "babel-preset-gatsby": "^0.2.26",
+    "gatsby": "^2.18.12",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "react": "^16.12.0",
+    "react-test-renderer": "^16.12.0"
+  }
 }
