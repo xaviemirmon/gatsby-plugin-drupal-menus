@@ -2,7 +2,21 @@
 
 This module works alongside the [Gatsby Live Preview](https://www.drupal.org/project/gatsby)  module for Drupal.
 
-To use this component simply add the following to your site where your wish for your menu to appear
+## Installation
+
+`npm -i gatsby-plugin-drupal-menus`
+
+In your `gatsby-config.js` add:
+
+module.exports = {
+  plugins: [
+    `gatsby-plugin-drupal-menus`
+  ]
+}
+
+## Usage
+
+To use this component simply add the following to your site's  where your wish for your menu to appear
 
 ```jsx harmony
 <Menu />
