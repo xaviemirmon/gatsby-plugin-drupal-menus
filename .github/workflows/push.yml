@@ -1,5 +1,16 @@
-- name: Publised to NPM
-  uses: mikeal/merge-release@master
-  env:
-    GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+name: Publised to NPM
+on:
+  push:
+    branches:
+      - master
+jobs:
+  label:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Publised to NPM
+        uses: mikeal/merge-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
