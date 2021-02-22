@@ -47,7 +47,7 @@ function buildLink(link) {
       {link.title}
     </Link>)
   } else {
-    return ( <a href={link.link.uri_alias} className={'external'}>
+    return ( <a href={link.link.uri} className={'external'}>
       {link.title}
     </a>)
   }
