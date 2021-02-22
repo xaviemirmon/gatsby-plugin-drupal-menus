@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-drupal-menus",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Adds support for nested hierarchical menus from Drupal 8/9 in Gatsby.",
   "main": "index.js",
   "scripts": {
