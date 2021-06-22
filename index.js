@@ -2,7 +2,7 @@ import React from "react"
 import { StaticQuery, graphql, Link } from "gatsby"
 import PropTypes from "prop-types";
 
-function createMenuHierarchy(menuData, menuName) {
+const createMenuHierarchy = (menuData, menuName) => {
   let tree = [],
      mappedArr = {},
      arrElem,
@@ -37,7 +37,7 @@ function createMenuHierarchy(menuData, menuName) {
   return tree
 }
 
-function buildLink(link) {
+const buildLink = link => {
   if(!link.external && link.link.uri_alias) {
     return ( <Link activeClassName="active" to={link.link.uri_alias}>
       {link.title}
@@ -53,7 +53,7 @@ function buildLink(link) {
   }
 }
 
-function buildMenu(menuArray){
+const buildMenu = menuArray => {
   if(!menuArray)  {
     return
   }
@@ -76,7 +76,7 @@ function buildMenu(menuArray){
 
 };
 
-function generateMenu(menuLinks, menuName) {
+const generateMenu = (menuLinks, menuName) => {
   let menu
 
   menu = createMenuHierarchy(menuLinks.allMenuLinkContentMenuLinkContent.edges, menuName)
